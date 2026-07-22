@@ -2,6 +2,8 @@
 import { AudioPlayer } from "./components/AudioPlayer";
 import { siteContent } from "../data/site";
 
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const navItems = [
   ["声音", "The Voice", "#voice"],
   ["华乐团", "Hua Yue Tuan", "#music"],
@@ -16,7 +18,7 @@ const timepieces = Array.from({ length: 21 }, (_, index) => {
 
   return {
     number,
-    src: `/media/internal-review/timepieces/watch-${number}-transparent.png`,
+    src: `${publicBasePath}/media/internal-review/timepieces/watch-${number}-transparent.png`,
   };
 });
 
@@ -69,7 +71,7 @@ export default function Home() {
           <div className="portrait-glow" aria-hidden="true" />
           <img
             className="portrait-photo"
-            src="/media/internal-review/fahua-portrait-source.jpg"
+            src={`${publicBasePath}/media/internal-review/fahua-portrait-source.jpg`}
             alt="法华法师项目来源人像，仅供内部审稿"
           />
           <div className="sound-lines" aria-hidden="true">
@@ -136,15 +138,15 @@ export default function Home() {
           </div>
           <div className="music-gallery" aria-label="华乐团舞台资料 Hua Yue Tuan stage archive">
             <figure className="music-gallery-feature">
-              <img src="/media/internal-review/huayuetuan-stage-01.jpg" alt="莲花装置与蓝色灯光中的舞台演出" />
+              <img src={`${publicBasePath}/media/internal-review/huayuetuan-stage-01.jpg`} alt="莲花装置与蓝色灯光中的舞台演出" />
               <figcaption>舞台资料 · 项目来源图片 / Stage archive · project-source image</figcaption>
             </figure>
             <figure>
-              <img src="/media/internal-review/huayuetuan-stage-02.jpg" alt="塔影旁的传统音乐演出" />
+              <img src={`${publicBasePath}/media/internal-review/huayuetuan-stage-02.jpg`} alt="塔影旁的传统音乐演出" />
               <figcaption>古建场域中的东方音乐 / Eastern music in a heritage setting</figcaption>
             </figure>
             <figure>
-              <img src="/media/internal-review/huayuetuan-stage-03.jpg" alt="红金舞台灯光下的合奏演出" />
+              <img src={`${publicBasePath}/media/internal-review/huayuetuan-stage-03.jpg`} alt="红金舞台灯光下的合奏演出" />
               <figcaption>音乐、身体与当代表达 / Music, movement and contemporary presentation</figcaption>
             </figure>
           </div>
