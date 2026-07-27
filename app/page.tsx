@@ -4,112 +4,128 @@ import { siteContent } from "../data/site";
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const navItems = [
-  ["文化信物", "Objects", "#objects"],
-  ["适合谁", "For whom", "#audiences"],
-  ["合作方式", "Collaboration", "#collaboration"],
-  ["东方声音", "Story", "#story"],
-  ["联系合作", "Contact", "#contact"],
+  ["Collection", "#objects"],
+  ["For whom", "#audiences"],
+  ["Selected objects", "#selected"],
+  ["Partnerships", "#collaboration"],
+  ["Source story", "#story"],
+  ["Contact", "#contact"],
 ] as const;
 
-const audienceEntries = [
+const collectionOffers = [
   {
-    labelZh: "个人 / 礼赠",
-    labelEn: "Personal & gifting",
-    detailZh: "为珍藏、纪念与重要关系选择一件有东方文化内容的信物。",
-    detailEn: "Choose a cultural object for collecting, remembrance or a meaningful gift.",
-    href: "#personal",
-  },
-  {
-    labelZh: "渠道 / 代理",
-    labelEn: "Channel partners",
-    detailZh: "获取专场作品资料、选品支持与适合渠道的合作组合。",
-    detailEn: "Access collection materials, selection support and channel-ready collaboration.",
-    href: "#channel",
-  },
-  {
-    labelZh: "文化机构",
-    labelEn: "Cultural institutions",
-    detailZh: "围绕音乐、非遗、展陈与文化礼赠开展主题共创。",
-    detailEn: "Co-create through music, heritage craft, exhibitions and cultural gifting.",
-    href: "#institution",
-  },
-] as const;
-
-const objectCategories = [
-  {
-    kickerZh: "佩戴与珍藏",
-    kickerEn: "Wear & collect",
-    titleZh: "腕间文化信物",
-    titleEn: "Cultural time objects",
-    detailZh: "以成熟时间载体承接东方纹样、声音线索与纪念主题，用于个人珍藏、文化礼赠与机构专场。",
-    detailEn: "Time objects shaped around Eastern motifs, sound references and commemorative themes.",
+    kicker: "Wear and collect",
+    title: "Collectible timepieces",
+    detail:
+      "Timepieces provide a considered material setting for visual motifs, commemorative themes, and stories connected to sound.",
     image: "02",
   },
   {
-    kickerZh: "声音与礼赠",
-    kickerEn: "Sound & gifting",
-    titleZh: "声音礼赠组合",
-    titleEn: "Sound-led gift sets",
-    detailZh: "在取得相应授权后，将声音内容与卡片、礼盒、证书及实体信物组合，形成可赠予的专场内容。",
-    detailEn: "Subject to the relevant rights, sound can be paired with cards, presentation boxes, certificates and physical objects.",
+    kicker: "Sound and gifting",
+    title: "Sound-led gifting concepts",
+    detail:
+      "Where the relevant rights are in place, sound may be paired with a card, presentation box, certificate, or physical keepsake.",
     image: "11",
   },
   {
-    kickerZh: "机构与场域",
-    kickerEn: "Institutions & places",
-    titleZh: "非遗器物与专场共创",
-    titleEn: "Heritage craft collaborations",
-    detailZh: "为文化机构、展陈项目与渠道伙伴提供主题策展、器物方向、礼赠组合与作品档案。",
-    detailEn: "Curatorial themes, crafted objects, gifting combinations and project archives for institutions and partners.",
+    kicker: "Institutions and places",
+    title: "Heritage-craft collaborations",
+    detail:
+      "Curatorial directions for museums, cultural programmes, gifting initiatives, and partners seeking a thoughtful collection format.",
     image: "20",
   },
 ] as const;
 
+const audienceEntries = [
+  {
+    title: "Collectors and gift buyers",
+    detail:
+      "Explore meaningful objects for personal collecting, remembrance, and gifts that carry a clear cultural point of view.",
+    href: "#personal",
+  },
+  {
+    title: "Channel partners",
+    detail:
+      "Discuss a focused collection, presentation materials, sample review, and a partnership shaped for your audience.",
+    href: "#channel",
+  },
+  {
+    title: "Museums and cultural institutions",
+    detail:
+      "Develop programmes and objects around music, heritage craft, exhibitions, and institutional gifting.",
+    href: "#institution",
+  },
+] as const;
+
 const representativeThemes = [
-  ["个人珍藏", "Personal collection"],
-  ["文化礼赠", "Cultural gifting"],
-  ["机构礼赠", "Institutional gifting"],
-  ["人物与家族共创", "Personal & family stories"],
-  ["声音主题策展", "Sound-led curation"],
-  ["非遗工艺共创", "Heritage craft"],
-  ["文明交流专场", "Cultural dialogue"],
+  "Personal keepsake",
+  "Thoughtful gift",
+  "Institutional gift",
+  "Portrait or family commission",
+  "Sound-led edition",
+  "Heritage-craft collaboration",
+  "Cultural exchange collection",
 ] as const;
 
 const collaborationModes = [
   {
     id: "personal",
-    tagZh: "个人 / 礼赠",
-    tagEn: "Personal & gifting",
-    titleZh: "从代表信物中选择，再加入专属心意",
-    titleEn: "Begin with a representative object, then make it personal.",
-    detailZh: "适合纪念、答谢、节庆与重要关系。可讨论纹样、文字、声音卡与礼盒组合，最终以可行规格和授权范围为准。",
-    detailEn: "For remembrance, appreciation and meaningful occasions. Motifs, inscriptions, sound cards and presentation boxes can be discussed within confirmed specifications and rights.",
+    tag: "Collectors and gift buyers",
+    title: "Begin with a selected form, then shape the meaning around the occasion.",
+    detail:
+      "A suitable route for remembrance, appreciation, and significant personal moments. Motifs, inscriptions, presentation, and sound-linked elements can be discussed within confirmed production and permission boundaries.",
+    cta: "Discuss a personal commission",
   },
   {
     id: "channel",
-    tagZh: "渠道 / 代理",
-    tagEn: "Channel partners",
-    titleZh: "以专场作品、样品资料与选品支持进入渠道",
-    titleEn: "Bring a focused cultural collection into your channel.",
-    detailZh: "适合文化礼赠、生活方式与高端服务渠道。合作从目标客群、选品范围、样品与交付条件开始确认。",
-    detailEn: "For cultural gifting, lifestyle and premium-service channels. Collaboration begins with audience, assortment, samples and delivery terms.",
+    tag: "Channel partners",
+    title: "Introduce a focused cultural collection to your audience.",
+    detail:
+      "For cultural gifting, design-led retail, and premium client services. We begin with audience, assortment, sample review, market context, and practical delivery requirements.",
+    cta: "Discuss a channel partnership",
   },
   {
     id: "institution",
-    tagZh: "文化机构",
-    tagEn: "Cultural institutions",
-    titleZh: "把音乐、非遗与场域内容转化为一组可交付作品",
-    titleEn: "Turn music, heritage craft and place into a deliverable collection.",
-    detailZh: "适合展陈、文化交流、纪念活动与机构礼赠。可围绕真实内容来源共同策展，并在授权与打样确认后推进制作。",
-    detailEn: "For exhibitions, cultural exchange, commemorative programmes and institutional gifting, developed from verified sources and confirmed rights.",
+    tag: "Museums and cultural institutions",
+    title: "Translate music, craft, and place into a coherent group of objects.",
+    detail:
+      "For exhibitions, exchange programmes, commemorative projects, and institutional gifts. Development starts from verified source material and proceeds within agreed permissions.",
+    cta: "Discuss an institutional collaboration",
   },
 ] as const;
 
 const collaborationProcess = [
-  ["说明场景", "Tell us the occasion", "对象、数量、时间与使用场景。", "Audience, quantity, timing and occasion."],
-  ["选择方向", "Choose a direction", "从代表信物、声音内容或专场共创中确定范围。", "Select an object, sound-led format or institutional collaboration."],
-  ["确认方案", "Confirm the proposal", "核对内容、授权、工艺、样品与交付条件。", "Confirm content, rights, craft, samples and delivery terms."],
-  ["制作交付", "Produce & deliver", "完成作品、礼赠组合及项目所需档案。", "Deliver the objects, gifting set and agreed project archive."],
+  {
+    title: "Share the brief",
+    detail: "Tell us the audience, intended use, quantity range, timing, and market or venue.",
+  },
+  {
+    title: "Select a direction",
+    detail: "Choose a representative object, a sound-led format, or an institutional collaboration.",
+  },
+  {
+    title: "Align the scope",
+    detail: "Confirm source material, permissions, craft approach, samples, and delivery requirements.",
+  },
+  {
+    title: "Develop and deliver",
+    detail: "Produce the agreed objects, presentation elements, and project documentation.",
+  },
+] as const;
+
+const values = [
+  {
+    title: "Quiet reflection",
+    detail: "Objects that create a quiet pause in everyday life and give memory a place to settle.",
+  },
+  {
+    title: "Cultural access",
+    detail: "Thoughtful formats that allow music and craft traditions to travel beyond specialist spaces.",
+  },
+  {
+    title: "Shared memory",
+    detail: "Gifts and collections that connect people, institutions, and significant occasions over time.",
+  },
 ] as const;
 
 export default function Home() {
@@ -118,23 +134,22 @@ export default function Home() {
   return (
     <main id="top">
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="法华文化信物首页 FA HUA cultural objects homepage">
-          <span lang="zh-CN">法华文化信物</span>
-          <small lang="en">FA HUA · CULTURAL OBJECTS</small>
+        <a className="wordmark" href="#top" aria-label="FA HUA cultural objects homepage">
+          <span>FA HUA</span>
+          <small>CULTURAL KEEPSAKES &amp; COLLABORATIONS</small>
         </a>
-        <nav className="desktop-nav" aria-label="主导航 Primary navigation">
-          {navItems.map(([zh, en, href]) => (
+        <nav className="desktop-nav" aria-label="Primary navigation">
+          {navItems.map(([label, href]) => (
             <a href={href} key={href}>
-              <span lang="zh-CN">{zh}</span>
-              <small lang="en">{en}</small>
+              <span>{label}</span>
             </a>
           ))}
         </nav>
-        <a className="header-cta" href="#contact">联系合作 · Contact</a>
+        <a className="header-cta" href="#contact">Start a conversation</a>
         <details className="mobile-menu">
-          <summary aria-label="打开导航 Open navigation">菜单 · Menu</summary>
-          <nav aria-label="移动端导航 Mobile navigation">
-            {navItems.map(([zh, en, href]) => <a href={href} key={href}>{zh} · {en}</a>)}
+          <summary aria-label="Open navigation">Menu</summary>
+          <nav aria-label="Mobile navigation">
+            {navItems.map(([label, href]) => <a href={href} key={href}>{label}</a>)}
           </nav>
         </details>
       </header>
@@ -144,81 +159,80 @@ export default function Home() {
           {Array.from({ length: 23 }, (_, index) => <i key={index} />)}
         </div>
         <div className="hero-copy">
-          <p className="eyebrow">东方声音 × 华乐 × 非遗工艺</p>
-          <h1 id="hero-title" lang="zh-CN">把一段东方声音，留成可以珍藏与传承的文化信物</h1>
-          <p className="hero-title-en" lang="en">Turn an Eastern voice into a cultural object to collect, gift and carry forward.</p>
-          <p className="hero-lede" lang="zh-CN">
-            围绕梵音、华乐与东方美学，策展腕表、声音卡、非遗器物与礼赠组合，为个人珍藏、文化礼赠和机构合作提供专场作品。
-          </p>
-          <p className="hero-lede-en" lang="en">
-            Cultural time objects, sound-led gifts and heritage craft collaborations for personal collecting, meaningful gifting and institutional partnerships.
+          <p className="eyebrow">Buddhist-inspired vocal music · Chinese instrumental music · Heritage craft</p>
+          <h1 id="hero-title">Cultural keepsakes shaped by sound, craft and story.</h1>
+          <p className="hero-lede">
+            We curate timepieces, sound-led gifting concepts, and heritage-craft collaborations for collectors, thoughtful gift buyers, channel partners, and cultural institutions.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#objects">查看文化信物</a>
-            <a className="button button-secondary" href="#collaboration">机构 / 渠道合作</a>
+            <a className="button button-primary" href="#objects">Explore the collection</a>
+            <a className="button button-secondary" href="#channel">Discuss a channel partnership</a>
           </div>
         </div>
 
-        <div className="hero-objects" aria-label="代表文化信物视觉 Representative cultural objects">
+        <div className="hero-objects" aria-label="Representative cultural objects">
           <figure className="hero-object hero-object-main">
             <span className="object-orbit" aria-hidden="true" />
-            <img src={`${publicBasePath}/media/internal-review/timepieces/watch-11-transparent.png`} alt="法华文化信物代表外观 11" />
-            <figcaption><span>文化信物专场</span><small>Representative form 11</small></figcaption>
+            <img src={`${publicBasePath}/media/internal-review/timepieces/watch-11-transparent.png`} alt="Representative cultural object, form 11" />
+            <figcaption><span>Selected form 11</span><small>Collection study</small></figcaption>
           </figure>
           <figure className="hero-object hero-object-small hero-object-left">
-            <img src={`${publicBasePath}/media/internal-review/timepieces/watch-02-transparent.png`} alt="法华文化信物代表外观 02" />
+            <img src={`${publicBasePath}/media/internal-review/timepieces/watch-02-transparent.png`} alt="Representative cultural object, form 02" />
           </figure>
           <figure className="hero-object hero-object-small hero-object-right">
-            <img src={`${publicBasePath}/media/internal-review/timepieces/watch-20-transparent.png`} alt="法华文化信物代表外观 20" />
+            <img src={`${publicBasePath}/media/internal-review/timepieces/watch-20-transparent.png`} alt="Representative cultural object, form 20" />
           </figure>
-        </div>
-
-        <div className="audience-dock" id="audiences" aria-label="按访客身份进入 Choose your path">
-          {audienceEntries.map((entry) => (
-            <a href={entry.href} key={entry.labelEn}>
-              <span>
-                <b lang="zh-CN">{entry.labelZh}</b>
-                <small lang="en">{entry.labelEn}</small>
-              </span>
-              <p lang="zh-CN">{entry.detailZh}</p>
-              <em aria-hidden="true">↗</em>
-            </a>
-          ))}
         </div>
       </section>
 
       <section className="offer-section section-shell" id="objects" aria-labelledby="objects-title">
         <div className="section-heading">
-          <p className="eyebrow">我们现在能提供什么 · What we offer</p>
-          <h2 id="objects-title" lang="zh-CN">从一件信物，到一组专场作品</h2>
-          <p lang="en">From one meaningful object to a complete cultural collection.</p>
+          <p className="eyebrow">What the collection offers</p>
+          <h2 id="objects-title">Objects designed to be kept, given, and developed together.</h2>
+          <p>A focused collection framework rather than a conventional biography or souvenir range.</p>
         </div>
         <div className="offer-grid">
-          {objectCategories.map((category, index) => (
-            <article className={index === 1 ? "offer-card offer-card-featured" : "offer-card"} key={category.titleEn}>
+          {collectionOffers.map((offer, index) => (
+            <article className={index === 1 ? "offer-card offer-card-featured" : "offer-card"} key={offer.title}>
               <figure>
                 <span className="card-ring" aria-hidden="true" />
-                <img src={`${publicBasePath}/media/internal-review/timepieces/watch-${category.image}-transparent.png`} alt={`${category.titleZh}代表外观 ${category.image}`} loading="lazy" />
+                <img src={`${publicBasePath}/media/internal-review/timepieces/watch-${offer.image}-transparent.png`} alt={`${offer.title}, representative form ${offer.image}`} loading="lazy" />
               </figure>
               <div>
-                <p className="card-kicker">{category.kickerZh} · {category.kickerEn}</p>
-                <h3 lang="zh-CN">{category.titleZh}</h3>
-                <h4 lang="en">{category.titleEn}</h4>
-                <p lang="zh-CN">{category.detailZh}</p>
-                <p lang="en">{category.detailEn}</p>
+                <p className="card-kicker">{offer.kicker}</p>
+                <h3>{offer.title}</h3>
+                <p>{offer.detail}</p>
               </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="representatives-section" aria-labelledby="representatives-title">
+      <section className="audience-section section-shell" id="audiences" aria-labelledby="audiences-title">
+        <div className="section-heading">
+          <p className="eyebrow">Who it is for</p>
+          <h2 id="audiences-title">Three paths into the collection.</h2>
+        </div>
+        <div className="audience-dock" aria-label="Choose the path that fits your interest">
+          {audienceEntries.map((entry) => (
+            <a href={entry.href} key={entry.title}>
+              <span><b>{entry.title}</b></span>
+              <p>{entry.detail}</p>
+              <em aria-hidden="true">↗</em>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="representatives-section" id="selected" aria-labelledby="representatives-title">
         <div className="section-shell representatives-heading">
           <div className="section-heading">
-            <p className="eyebrow">代表文化信物 · Selected objects</p>
-            <h2 id="representatives-title" lang="zh-CN">七个方向，回应不同的珍藏与合作场景</h2>
+            <p className="eyebrow">Selected objects</p>
+            <h2 id="representatives-title">Seven directions for collecting, gifting, and cultural collaboration.</h2>
           </div>
-          <p className="section-lede" lang="zh-CN">从个人赠礼到文化机构专场，先选择接近你需求的方向，再确认内容、工艺与交付范围。</p>
+          <p className="section-lede">
+            These are representative form studies, presented as starting points. Names, specifications, and commercial terms are set only within an agreed project scope.
+          </p>
         </div>
         <div className="object-rail section-shell">
           {flagships.map((item, index) => (
@@ -227,14 +241,13 @@ export default function Home() {
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <img
                   src={`${publicBasePath}/media/internal-review/timepieces/watch-${item.imageNumber}-transparent.png`}
-                  alt={`${representativeThemes[index][0]}代表外观 ${item.imageNumber}`}
+                  alt={`${representativeThemes[index]}, representative form ${item.imageNumber}`}
                   loading="lazy"
                 />
               </figure>
               <div>
-                <h3 lang="zh-CN">{representativeThemes[index][0]}</h3>
-                <p lang="en">{representativeThemes[index][1]}</p>
-                <small>代表外观 {item.imageNumber} · Form {item.imageNumber}</small>
+                <h3>{representativeThemes[index]}</h3>
+                <small>Form {item.imageNumber}</small>
               </div>
             </article>
           ))}
@@ -243,23 +256,16 @@ export default function Home() {
 
       <section className="collaboration-section section-shell" id="collaboration" aria-labelledby="collaboration-title">
         <div className="section-heading collaboration-heading">
-          <p className="eyebrow">三种合作方式 · Three ways to work together</p>
-          <h2 id="collaboration-title" lang="zh-CN">按你的场景，选择合适的合作深度</h2>
-          <p lang="en">Choose the level of collaboration that fits your audience and occasion.</p>
+          <p className="eyebrow">Ways to work together</p>
+          <h2 id="collaboration-title">Choose a partnership model that fits the audience and occasion.</h2>
         </div>
         <div className="collaboration-list">
           {collaborationModes.map((mode) => (
             <article id={mode.id} key={mode.id}>
-              <p className="mode-tag">{mode.tagZh}<small>{mode.tagEn}</small></p>
-              <div>
-                <h3 lang="zh-CN">{mode.titleZh}</h3>
-                <h4 lang="en">{mode.titleEn}</h4>
-              </div>
-              <div>
-                <p lang="zh-CN">{mode.detailZh}</p>
-                <p lang="en">{mode.detailEn}</p>
-              </div>
-              <a href="#contact">联系合作 <span aria-hidden="true">↗</span></a>
+              <p className="mode-tag">{mode.tag}</p>
+              <div><h3>{mode.title}</h3></div>
+              <div><p>{mode.detail}</p></div>
+              <a href="#contact">{mode.cta} <span aria-hidden="true">↗</span></a>
             </article>
           ))}
         </div>
@@ -268,18 +274,16 @@ export default function Home() {
       <section className="process-section" aria-labelledby="process-title">
         <div className="section-shell process-layout">
           <div className="section-heading">
-            <p className="eyebrow">合作流程 · Process</p>
-            <h2 id="process-title" lang="zh-CN">四步把想法落到作品</h2>
-            <p lang="en">Four steps from intent to a deliverable object.</p>
+            <p className="eyebrow">Process</p>
+            <h2 id="process-title">From a clear brief to an agreed object.</h2>
           </div>
           <ol className="process-list">
-            {collaborationProcess.map(([titleZh, titleEn, detailZh, detailEn], index) => (
-              <li key={titleEn}>
+            {collaborationProcess.map((step, index) => (
+              <li key={step.title}>
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <div>
-                  <h3>{titleZh}<small>{titleEn}</small></h3>
-                  <p lang="zh-CN">{detailZh}</p>
-                  <p lang="en">{detailEn}</p>
+                  <h3>{step.title}</h3>
+                  <p>{step.detail}</p>
                 </div>
               </li>
             ))}
@@ -290,63 +294,67 @@ export default function Home() {
       <section className="story-section" id="story" aria-labelledby="story-title">
         <div className="story-visual">
           <figure className="story-portrait">
-            <img src={`${publicBasePath}/media/internal-review/fahua-portrait-source.jpg`} alt="法华文化专场人物来源图" loading="lazy" />
+            <img src={`${publicBasePath}/media/internal-review/fahua-portrait-source.jpg`} alt="Project-source portrait of Venerable Fahua" loading="lazy" />
           </figure>
           <figure className="story-stage">
-            <img src={`${publicBasePath}/media/internal-review/huayuetuan-stage-01.jpg`} alt="东方音乐舞台项目来源图" loading="lazy" />
+            <img src={`${publicBasePath}/media/internal-review/huayuetuan-stage-01.jpg`} alt="Project-source image of a Chinese instrumental music performance" loading="lazy" />
           </figure>
         </div>
         <div className="story-copy">
-          <p className="eyebrow">人物、声音与文化故事 · The source</p>
-          <h2 id="story-title" lang="zh-CN">文化信物的内容，来自真实的人、声音与东方美学</h2>
-          <p className="story-title-en" lang="en">Cultural objects begin with real people, sound and Eastern aesthetics.</p>
-          <p lang="zh-CN">
-            法华文化信物以东方声音、华乐与非遗工艺为内容线索，探索声音如何进入日常器物、礼赠关系与文化交流。人物与机构介绍将在正式资料统一后完整呈现。
+          <p className="eyebrow">The source story</p>
+          <h2 id="story-title">The collection begins with sound, material, and living cultural context.</h2>
+          <p>
+            The cultural world around {person.displayName} provides a starting point: Buddhist-inspired vocal music, Chinese instrumental music, quiet reflection, and craft traditions through which memory can take material form.
           </p>
-          <p lang="en">
-            FA HUA cultural objects explore how Eastern sound, Chinese music and heritage craft can enter everyday objects, meaningful gifts and cultural exchange. Full profiles will follow verified source material.
+          <p>
+            This is not presented as a biography or a religious promise. It is a careful curatorial framework for developing objects and collaborations from cultural source material.
           </p>
-          <div className="sound-preview" aria-label="声音内容预留 Sound content preview">
-            <button type="button" disabled aria-label="声音内容将在授权后开放 Sound content will open after authorisation">▶</button>
-            <span><b>东方声音专场</b><small>Sound programme · coming after content clearance</small></span>
+          <div className="sound-preview" aria-label="Audio programme preview">
+            <button type="button" disabled aria-label="Audio will be available when the relevant permissions are in place">▶</button>
+            <span><b>Sound programme</b><small>Audio will open when the relevant permissions are in place.</small></span>
           </div>
         </div>
       </section>
 
-      <section className="three-practices section-shell" aria-labelledby="practices-title">
+      <section className="three-practices section-shell" aria-labelledby="values-title">
         <div className="section-heading">
-          <p className="eyebrow">共同内核 · Shared purpose</p>
-          <h2 id="practices-title" lang="zh-CN">安民心 · 惠民生 · 聚民众</h2>
-          <p lang="en">Peace of mind · Culture for all · A living community</p>
+          <p className="eyebrow">Values</p>
+          <h2 id="values-title">Reflection, cultural access, and shared memory.</h2>
         </div>
         <div className="practice-grid">
-          <article><h3>安民心</h3><small>Peace of mind</small><p>让温和、向善的声音进入日常，让记忆有安放之处。</p></article>
-          <article><h3>惠民生</h3><small>Culture for all</small><p>让文化通过可亲近的信物与礼赠，走进更多人的生活。</p></article>
-          <article><h3>聚民众</h3><small>A living community</small><p>连接个人、家庭与机构，让真实故事成为共同的文化记忆。</p></article>
+          {values.map((value) => (
+            <article key={value.title}>
+              <h3>{value.title}</h3>
+              <p>{value.detail}</p>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="contact-section" id="contact" aria-labelledby="contact-title">
         <div className="contact-inner section-shell">
-          <p className="eyebrow">联系合作 · Start a conversation</p>
-          <h2 id="contact-title" lang="zh-CN">告诉我们，你想为谁留下一件怎样的文化信物</h2>
-          <p lang="en">Tell us who the object is for, the occasion and the kind of story it should carry.</p>
+          <p className="eyebrow">Start a conversation</p>
+          <h2 id="contact-title">Tell us what you are planning to collect, gift, or co-create.</h2>
+          <p>Helpful details include the intended audience, quantity range, timing, market or venue, and the cultural context you want the project to respect.</p>
           <div className="contact-actions">
-            <span className="button button-primary">联系 BD · Contact BD</span>
-            <p>建议准备：使用对象、数量范围、时间节点与合作场景。</p>
+            <a className="button button-primary" href="mailto:540148510@qq.com">Email the partnership team</a>
+            <div className="contact-details">
+              <a href="mailto:540148510@qq.com">540148510@qq.com</a>
+              <a href="tel:+8613712670275">+86 137 1267 0275</a>
+            </div>
           </div>
         </div>
       </section>
 
       <footer className="site-footer">
         <div>
-          <b>{person.chineseName} · {person.displayName}</b>
-          <span>法华文化信物 · FA HUA Cultural Objects</span>
+          <b>{person.displayName}</b>
+          <span>FA HUA Cultural Objects</span>
         </div>
         <p>
-          本站用于文化信物与合作方向沟通。涉及肖像、声音、法号、机构、图片及衍生品的公开与商业使用，以最终书面授权、规格及项目确认文件为准。
+          <strong>Rights &amp; Permissions.</strong> Public and commercial use of names, portraits, recordings, texts, institutional references, images, and derivative works is subject to the relevant written permissions and the final project scope.
         </p>
-        <a href="#top">回到顶部 · Back to top ↑</a>
+        <a href="#top">Back to top ↑</a>
       </footer>
     </main>
   );

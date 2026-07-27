@@ -2,25 +2,25 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "法华文化信物 · 东方声音、华乐与非遗工艺",
-  description: "围绕梵音、华乐与东方美学，策展腕表、声音卡、非遗器物与礼赠组合，为个人珍藏、文化礼赠、渠道合作和文化机构共创提供专场作品。",
+  title: "FA HUA Cultural Objects | Music, Heritage Craft & Gifting",
+  description: "Curated cultural keepsakes and gifting collaborations informed by Buddhist-inspired vocal music, Chinese instrumental music, and heritage craft.",
   openGraph: {
-    title: "法华文化信物 · FA HUA Cultural Objects",
-    description: "把一段东方声音，留成可以珍藏与传承的文化信物。",
+    title: "FA HUA Cultural Objects",
+    description: "Cultural keepsakes shaped by sound, craft and story.",
     url: "https://oriordangissy-boop.github.io/fahua/",
-    siteName: "法华文化信物",
-    locale: "zh_CN",
+    siteName: "FA HUA Cultural Objects",
+    locale: "en_GB",
     type: "website",
     images: ["https://oriordangissy-boop.github.io/fahua/og.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "法华文化信物 · FA HUA Cultural Objects",
-    description: "东方声音、华乐与非遗工艺的文化信物与合作专场。",
+    title: "FA HUA Cultural Objects",
+    description: "Music, heritage craft, and considered gifting collaborations.",
     images: ["https://oriordangissy-boop.github.io/fahua/og.png"],
   },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="zh-CN"><body>{children}</body></html>;
+  return <html lang="en"><body>{children}</body></html>;
 }

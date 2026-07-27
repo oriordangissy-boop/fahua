@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readdir } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function render() {
@@ -14,31 +14,51 @@ async function render() {
   );
 }
 
-test("server-renders the customer-facing cultural objects homepage", async () => {
+test("server-renders the English cultural objects homepage", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /法华文化信物 · 东方声音、华乐与非遗工艺/);
-  assert.match(html, /把一段东方声音，留成可以珍藏与传承的文化信物/);
-  assert.match(html, /Turn an Eastern voice into a cultural object/);
-  assert.match(html, /个人 \/ 礼赠/);
-  assert.match(html, /渠道 \/ 代理/);
-  assert.match(html, /文化机构/);
-  assert.match(html, /腕间文化信物/);
-  assert.match(html, /声音礼赠组合/);
-  assert.match(html, /非遗器物与专场共创/);
-  assert.match(html, /三种合作方式/);
-  assert.match(html, /四步把想法落到作品/);
-  assert.match(html, /安民心 · 惠民生 · 聚民众/);
-  assert.doesNotMatch(html, /公开审稿版本|Public review edition/);
-  assert.doesNotMatch(html, /标准化负责效率|四十九格|7×7 文化信物地图|权利状态/);
+  assert.match(html, /Cultural keepsakes shaped by sound, craft and story\./);
+  assert.match(html, /Buddhist-inspired vocal music/);
+  assert.match(html, /Chinese instrumental music/);
+  assert.match(html, /Collectors and gift buyers/);
+  assert.match(html, /Channel partners/);
+  assert.match(html, /Museums and cultural institutions/);
+  assert.match(html, /Collectible timepieces/);
+  assert.match(html, /Discuss a personal commission/);
+  assert.match(html, /Discuss a channel partnership/);
+  assert.match(html, /Discuss an institutional collaboration/);
+  assert.match(html, /Quiet reflection/);
+  assert.match(html, /Cultural access/);
+  assert.match(html, /Shared memory/);
+  assert.match(html, /mailto:540148510@qq\.com/);
+  assert.match(html, /tel:\+8613712670275/);
+  assert.match(html, /\+86 137 1267 0275/);
+  assert.match(html, /Rights &amp; Permissions/);
+  assert.doesNotMatch(html, /Public review edition/);
   assert.equal(new Set(html.match(/watch-\d{2}-transparent\.png/g) ?? []).size, 7);
-  assert.match(html, /联系 BD · Contact BD/);
-  assert.doesNotMatch(html, /NFT|封圣|护身结界|能量场|全球限量|百万级|利润奶牛|验资门槛/);
+  assert.doesNotMatch(html, /NFT|canonisation|protective field|energy field|global limited edition/i);
+  assert.doesNotMatch(html, /[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]/u);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/);
 
   const archivedAssets = await readdir(new URL("../public/media/internal-review/timepieces/", import.meta.url));
   assert.equal(archivedAssets.filter((name) => /^watch-\d{2}-transparent\.png$/.test(name)).length, 21);
+});
+
+test("public source contains no Han characters", async () => {
+  const root = new URL("../", import.meta.url);
+  const files = [
+    "app/page.tsx",
+    "app/layout.tsx",
+    "app/globals.css",
+    "app/components/AudioPlayer.tsx",
+    "data/site.ts",
+  ];
+
+  for (const file of files) {
+    const source = await readFile(new URL(file, root), "utf8");
+    assert.doesNotMatch(source, /[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]/u, file);
+  }
 });

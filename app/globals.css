@@ -12,8 +12,8 @@
   --jade: #50665c;
   --line: rgba(198, 164, 103, 0.24);
   --line-light: rgba(238, 230, 212, 0.15);
-  --display: "Noto Serif SC", "Songti SC", "STSong", "SimSun", Georgia, serif;
-  --body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  --display: "Iowan Old Style", Baskerville, "Times New Roman", serif;
+  --body: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
   --utility: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -143,7 +143,7 @@ summary {
   isolation: isolate;
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(430px, 1.1fr);
-  grid-template-rows: minmax(550px, 1fr) auto;
+  grid-template-rows: minmax(550px, 1fr);
   min-height: calc(100svh - 86px);
   overflow: hidden;
   padding: clamp(62px, 7vw, 104px) max(4vw, calc((100vw - 1180px) / 2)) 0;
@@ -400,7 +400,7 @@ summary {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  margin-top: 10px;
+  margin-top: 56px;
   border-top: 1px solid var(--line);
   background: rgba(8, 8, 6, 0.76);
   backdrop-filter: blur(14px);
@@ -478,7 +478,7 @@ summary {
   line-height: 1.2;
 }
 
-.section-heading > p[lang="en"] {
+.section-heading > p:not(.eyebrow) {
   margin: 16px 0 0;
   color: var(--gold);
   font-family: var(--display);
@@ -693,7 +693,7 @@ summary {
 
 .collaboration-list article {
   display: grid;
-  grid-template-columns: 170px 1fr 1fr 90px;
+  grid-template-columns: 170px 1fr 1fr minmax(160px, 210px);
   gap: clamp(24px, 4vw, 64px);
   align-items: start;
   padding: 44px 0;
@@ -1022,7 +1022,7 @@ summary {
   line-height: 1.18;
 }
 
-.contact-inner > p[lang="en"] {
+.contact-inner > p:not(.eyebrow) {
   max-width: 750px;
   margin: 22px 0 0;
   color: var(--gold);
@@ -1045,6 +1045,25 @@ summary {
   color: var(--paper-soft);
   font-size: 11px;
   line-height: 1.7;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.contact-details a {
+  width: max-content;
+  color: var(--paper);
+  font-family: var(--utility);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.contact-details a:hover,
+.contact-details a:focus-visible {
+  color: var(--gold);
 }
 
 .site-footer {
@@ -1197,7 +1216,7 @@ summary:focus-visible {
     display: flex;
     min-height: auto;
     flex-direction: column;
-    padding: 64px 20px 0;
+    padding: 64px 20px 360px;
   }
 
   .hero::before {
@@ -1257,7 +1276,7 @@ summary:focus-visible {
 
   .audience-dock {
     grid-template-columns: 1fr;
-    margin: 330px -20px 0;
+    margin: 48px 0 0;
   }
 
   .audience-dock > a {
