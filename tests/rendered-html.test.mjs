@@ -14,22 +14,26 @@ async function render() {
   );
 }
 
-test("server-renders the public evidence-labelled homepage", async () => {
+test("server-renders the customer-facing cultural objects homepage", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /法华 · FA HUA · 让东方文化点亮世界/);
-  assert.match(html, /慈悲之声/);
-  assert.match(html, /A voice of compassion/);
-  assert.match(html, /法华 · 独立文化入口 \/ FA HUA · Independent cultural gateway/);
-  assert.match(html, /公开审稿版本 · Public review edition/);
-  assert.match(html, /音频接口已预留/);
+  assert.match(html, /法华文化信物 · 东方声音、华乐与非遗工艺/);
+  assert.match(html, /把一段东方声音，留成可以珍藏与传承的文化信物/);
+  assert.match(html, /Turn an Eastern voice into a cultural object/);
+  assert.match(html, /个人 \/ 礼赠/);
+  assert.match(html, /渠道 \/ 代理/);
+  assert.match(html, /文化机构/);
+  assert.match(html, /腕间文化信物/);
+  assert.match(html, /声音礼赠组合/);
+  assert.match(html, /非遗器物与专场共创/);
+  assert.match(html, /三种合作方式/);
+  assert.match(html, /四步把想法落到作品/);
   assert.match(html, /安民心 · 惠民生 · 聚民众/);
-  assert.match(html, /标准化负责效率，定制化说明价值从何而来/);
-  assert.match(html, /一级一旗舰 \/ One flagship per level/);
-  assert.match(html, /四十九格，是长期地图，不是四十九件现货/);
+  assert.doesNotMatch(html, /公开审稿版本|Public review edition/);
+  assert.doesNotMatch(html, /标准化负责效率|四十九格|7×7 文化信物地图|权利状态/);
   assert.equal(new Set(html.match(/watch-\d{2}-transparent\.png/g) ?? []).size, 7);
   assert.match(html, /联系 BD · Contact BD/);
   assert.doesNotMatch(html, /NFT|封圣|护身结界|能量场|全球限量|百万级|利润奶牛|验资门槛/);
