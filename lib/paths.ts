@@ -1,0 +1,10 @@
+export const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+export function sitePath(path: string) {
+  const normalised = path.startsWith("/") ? path : `/${path}`;
+  return `${basePath}${normalised}`;
+}
+
+export function mediaPath(path: string) {
+  return `${basePath}${path.startsWith("/") ? path : `/${path}`}`;
+}
